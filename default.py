@@ -1,9 +1,7 @@
 ﻿import re
-import os
 import urllib
 import urllib2
 import xbmcgui
-import xbmcvfs
 import xbmcaddon
 import StorageServer
 from traceback import format_exc
@@ -13,7 +11,6 @@ addon = xbmcaddon.Addon()
 addon_id = addon.getAddonInfo('id')
 addon_version = addon.getAddonInfo('version')
 addon_path = xbmc.translatePath(addon.getAddonInfo('path'))
-addon_profile = xbmc.translatePath(addon.getAddonInfo('profile'))
 cache = StorageServer.StorageServer("funnyordie", 2)
 base_url = 'http://www.funnyordie.com'
 cache.dbg = True
@@ -107,7 +104,7 @@ def get_videos_nav(soup):
         nav['current'].append([{'label': x.string, 'value': y.string} for x in i('span')[0] for y in i('span')[1].a][0])
         nav[i['id']] = [{'title': x.string, 'href': x['href']} for x in i('a')]
     return nav
-    
+
 
 def get_homepage(url):
     addon_log('get_homepage')
@@ -150,8 +147,8 @@ def get_page(href):
     data = make_request(base_url + href)
     soup = BeautifulSoup(data, convertEntities=BeautifulSoup.HTML_ENTITIES)
     return get_videos(soup)
-    
-    
+
+
 def get_search():
     keyboard = xbmc.Keyboard('', 'Search')
     keyboard.doModal()
@@ -252,11 +249,11 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
             self.videos_control.addItem(get_listitem(i, True))
         if control_position:
             self.move_videos_control(control_position)
-            
+
     def move_videos_control(self, control_position):
         self.setFocus(self.videos_control)
         xbmc.executebuiltin("Control.Move(1272, %s)" %control_position)
-        
+
     def get_all_videos(self, href):
         addon_log('get all videos: %s' %href)
         url = base_url + href
@@ -290,7 +287,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
             self.videos_control.addItem(get_listitem(i, True))
         self.load_more_button.setEnabled(False)
         self.set_menu('Videos')
-        
+
     def display_search(self, next_page, items):
         for i in items:
             self.videos_control.addItem(get_listitem(i, True))
@@ -341,7 +338,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
                 control = self.window.getControl(1268)
             control.setLabel('%s :  [B]%s[/B]' %(i['label'], i['value']))
         cache.set('videos_nav', repr(nav))
-        
+
     def set_video_filter_button(self, reset=False):
         for i in [self.video_filter_button_1, self.video_filter_button_2, self.video_filter_button_3]:
             if not reset:
@@ -350,13 +347,13 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
             else:
                 i.controlDown(self.videos_control)
                 i.controlUp(self.nav_button_1)
-        
+
     def filter_videos(self, filter_type):
         items = eval(cache.get('videos_nav'))[filter_type]
         for i in items:
             self.filter_list.addItem(get_listitem(i))
         xbmc.executebuiltin("Skin.ToggleSetting(FilterDialog)")
-        
+
     def set_current_control(self):
         try:
             self.current_control = [i for i in [self.jumbo_control, self.videos_control] if self.getFocus() == i][0]
@@ -376,14 +373,14 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
                 player.stop()
             elif xbmc.getCondVisibility("Window.IsVisible(videoosd)") == False:
                 xbmc.executebuiltin("ActivateWindow(videoosd)")
-                
+
         elif action == 117:
             # context menu
             self.set_current_control()
             if self.current_control:
                 xbmc.executebuiltin("Skin.ToggleSetting(ContextDialog)")
                 self.setFocus(self.context_button_1)
-                    
+
         elif action == 13:
             #keyboard x key
             self.shutdown()
@@ -457,7 +454,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
                 xbmc.sleep(500)
             self.set_video_filter_button()
             self.setFocus(self.filter_list)
-                
+
 
         elif control_id == 1268:
             self.menu = 'FilterDialog'
@@ -508,7 +505,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
         elif control_id == 1287:
             xbmc.executebuiltin("Skin.Reset(ContextDialog)")
             self.setFocus(self.current_control)
-            
+
         # videos filter control
         elif control_id == 1289:
             xbmc.executebuiltin("Skin.Reset(FilterDialog)")
@@ -519,7 +516,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
             self.display_all_videos()
             self.menu = 'VideosMenu'
             self.setFocus(self.videos_control)
-        
+
 
 if (__name__ == "__main__"):
     addon_log('script starting')
