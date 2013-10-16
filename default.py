@@ -68,6 +68,7 @@ def make_request(url, data=None, headers=None):
 
 
 def play(listitem, playlist=False):
+    player = xbmc.Player()
     if playlist:
         playlist = xbmc.PlayList(1)
         playlist.clear()
@@ -149,16 +150,19 @@ def get_page(href):
     return get_videos(soup)
 
 
-def get_search():
-    keyboard = xbmc.Keyboard('', 'Search')
-    keyboard.doModal()
-    if keyboard.isConfirmed() == False:
-        return
-    search_query = keyboard.getText()
-    if len(search_query) == 0:
-        return
-    addon_log('get_search: %s' %search_query)
-    href = '/search/a?search_term=%s' %urllib.quote_plus(search_query)
+def get_search(href=None):
+    if href is None:
+        keyboard = xbmc.Keyboard('', 'Search')
+        keyboard.doModal()
+        if keyboard.isConfirmed() == False:
+            return
+        search_query = keyboard.getText()
+        if len(search_query) == 0:
+            return
+        addon_log('get_search: %s' %search_query)
+        href = '/search/a?search_term=%s' %urllib.quote_plus(search_query)
+    else:
+        print href
     data = make_request(base_url + href)
     soup = BeautifulSoup(data, convertEntities=BeautifulSoup.HTML_ENTITIES)
     try:
@@ -182,18 +186,19 @@ def get_listitem(item, is_video=False):
 
 
 
-class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
+class FunnyOrDieGUI(xbmcgui.WindowXML):
     def __init__( self, *args, **kwargs ):
-        xbmcgui.WindowXMLDialog.__init__(self)
+        xbmcgui.WindowXML.__init__(self)
         self.action_previous_menu = (9, 10, 92, 216, 247, 257, 275, 61467, 61448)
-        self.menu_settings = ['BrowseMenu', 'HomeMenu', 'VideosMenu',
+        self.menu_settings = ['BrowseMenu', 'HomeMenu', 'VideosMenu', 'Search'
                               'Videos', 'ContextDialog', 'FilterDialog']
         self.home_url = base_url
         self.menu = None
         self.video_page = None
+        self.next_page = None
 
     def onInit(self):
-        self.window = xbmcgui.Window(xbmcgui.getCurrentWindowDialogId())
+        self.window = xbmcgui.Window(xbmcgui.getCurrentWindowId())
         self.jumbo_control = self.window.getControl(1271)
         self.videos_control = self.window.getControl(1272)
         self.load_more_button = self.window.getControl(1274)
@@ -210,25 +215,26 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
         self.context_button_1 = self.window.getControl(1286)
         self.filter_dialog = self.window.getControl(1288)
         self.filter_list = self.window.getControl(1289)
+        self.load_more_button.setVisible(False)
         self.display_homepage()
+        
 
     def display_homepage(self, page=False):
-        data = get_homepage(self.home_url)
         if not page:
+            data = get_homepage(self.home_url)
             self.jumbo_control.reset()
             self.videos_control.reset()
             for i in data['jumbo']:
                 self.jumbo_control.addItem(get_listitem(i, True))
-        control_position = self.videos_control.getSelectedPosition()
+        else:
+            data = get_homepage(page)
+            control_position = self.videos_control.size()
         for i in data['videos']:
             self.videos_control.addItem(get_listitem(i, True))
         if data['page']:
-            self.load_more_button.setEnabled(True)
-            self.window.setProperty('nextPage', data['page'])
-            addon_log('nextHomePage: %s' %data['page'])
+            self.next_page = data['page']
         else:
-            self.load_more_button.setEnabled(False)
-            self.window.setProperty('nextPage', '')
+            self.next_page = None
         if page:
             self.move_videos_control(control_position)
         else:
@@ -242,7 +248,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
             self.set_menu('VideosMenu')
         else:
             if '&page' in self.video_page:
-                control_position = self.videos_control.getSelectedPosition()
+                control_position = self.videos_control.size()
             href = self.video_page
         data = self.get_all_videos(href)
         for i in data:
@@ -252,7 +258,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
 
     def move_videos_control(self, control_position):
         self.setFocus(self.videos_control)
-        xbmc.executebuiltin("Control.Move(1272, %s)" %control_position)
+        self.videos_control.selectItem(control_position - 1)
 
     def get_all_videos(self, href):
         addon_log('get all videos: %s' %href)
@@ -262,11 +268,10 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
             next_page = soup.find('a', attrs={'class': "infinite-more-link js-infinite-more-link"})['href']
             self.video_page = next_page
             addon_log('next_video_page: %s' %next_page)
-            self.load_more_button.setEnabled(True)
+            self.next_page = True
         except:
             addon_log('Exception next_page: %s' %format_exc())
-            next_page = None
-            self.load_more_button.setEnabled(False)
+            self.next_page = False
         if not '&page' in href:
             self.set_video_nav(get_videos_nav(soup))
         return get_videos(soup)
@@ -285,18 +290,14 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
         self.videos_control.reset()
         for i in data:
             self.videos_control.addItem(get_listitem(i, True))
-        self.load_more_button.setEnabled(False)
         self.set_menu('Videos')
 
     def display_search(self, next_page, items):
         for i in items:
             self.videos_control.addItem(get_listitem(i, True))
         if next_page:
-            self.video_page = next_page
-            self.load_more_button.setEnabled(True)
-        else:
-            self.load_more_button.setEnabled(False)
-        self.set_menu('Videos')
+            self.next_page = next_page
+        self.set_menu('Search')
 
     def set_menu(self, menu=None):
         self.menu = None
@@ -316,7 +317,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
         elif self.menu == 'BrowseMenu':
             v_control = self.cat_control
             self.nav_button_1.setLabel('[B]Home[/B]')
-        elif self.menu == 'Videos':
+        elif self.menu == 'Videos' or self.menu == 'Search':
             v_control = self.videos_control
         elif self.menu == 'VideosMenu':
             self.nav_button_2.setLabel('[B]Home[/B]')
@@ -357,24 +358,29 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
     def set_current_control(self):
         try:
             self.current_control = [i for i in [self.jumbo_control, self.videos_control] if self.getFocus() == i][0]
-            addon_log('current control: %s'  %self.current_control.getId())
+            # addon_log('current control: %s'  %self.current_control.getId())
         except:
             self.current_control = None
 
+    def check_load_more(self):
+        pos = self.videos_control.getSelectedPosition()
+        size = self.videos_control.size()
+        if size % 2 > 0:
+            pos += 1
+        else:
+            pos += 2
+        if pos >= size:
+            self.load_more_button.setVisible(True)
+        else:
+            self.load_more_button.setVisible(False)
+            
     def shutdown(self):
         self.window.setProperty('videos_filter', '')
-        self.window.setProperty('nextPage', '')
         self.set_menu()
         self.close()
 
     def onAction(self, action):
-        if xbmc.getCondVisibility("Window.IsVisible(fullscreenvideo)") == True:
-            if action == 13:
-                player.stop()
-            elif xbmc.getCondVisibility("Window.IsVisible(videoosd)") == False:
-                xbmc.executebuiltin("ActivateWindow(videoosd)")
-
-        elif action == 117:
+        if action == 117:
             # context menu
             self.set_current_control()
             if self.current_control:
@@ -394,12 +400,20 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
                 self.display_homepage()
             else:
                 self.shutdown()
+                
+        elif action in (107, 1, 2, 3, 4):
+            if self.next_page:
+                self.set_current_control()
+                if self.current_control and self.current_control is self.videos_control:
+                    self.check_load_more()
 
     def onClick(self, control_id):
         addon_log('onClick control_id: %s' %control_id)
 
         # navigation controls
         if control_id == 1261:
+            self.load_more_button.setVisible(False)
+            self.next_page = False
             if self.menu == 'BrowseMenu':
                 self.home_url = base_url
                 self.videos_control.reset()
@@ -408,6 +422,8 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
                 self.display_browse()
 
         elif control_id == 1262:
+            self.load_more_button.setVisible(False)
+            self.next_page = False
             if self.menu == 'VideosMenu':
                 self.home_url = base_url
                 self.videos_control.reset()
@@ -418,6 +434,8 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
                 self.display_all_videos()
 
         elif control_id == 1263:
+            self.load_more_button.setVisible(False)
+            self.next_page = False
             search = get_search()
             if search:
                 self.videos_control.reset()
@@ -476,14 +494,17 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
 
         elif control_id == 1272:
             item = self.videos_control.getSelectedItem()
-            play(item)
+            if item:
+                play(item)
 
         elif control_id == 1274:
+            self.load_more_button.setVisible(False)
             if self.menu == 'HomeMenu':
-                self.home_url = self.window.getProperty('nextPage')
-                self.display_homepage(True)
+                self.display_homepage(self.next_page)
             elif self.menu == 'VideosMenu':
                 self.display_all_videos()
+            elif self.menu == 'Search':
+                self.display_search(*get_search(self.next_page))
 
         # browse controls
         elif control_id == 1281:
@@ -516,11 +537,11 @@ class FunnyOrDieGUI(xbmcgui.WindowXMLDialog):
             self.display_all_videos()
             self.menu = 'VideosMenu'
             self.setFocus(self.videos_control)
+            
 
 
 if (__name__ == "__main__"):
     addon_log('script starting')
-    player = xbmc.Player()
     window = FunnyOrDieGUI('script-funnyordie.xml', addon_path)
     window.doModal()
 

@@ -1,6 +1,5 @@
-<window type="window" id="9506">
+<window>
     <allowoverlay>yes</allowoverlay>
-    <defaultcontrol always="false">1261</defaultcontrol>
     <controls>
     
         <control type="image">
@@ -17,9 +16,9 @@
         <!-- navigation -->
         <control type="group" id="1260">
             <description>nav group control</description>
-            <width>1280</width>
-            <height>100</height>
-            <defaultcontrol>1261</defaultcontrol>
+            <!--width>1280</width>
+            <height>100</height-->
+            <defaultcontrol always="false">1261</defaultcontrol>
             <visible>!VideoPlayer.IsFullscreen</visible> 
             <control type="image">
                 <width>1280</width>
@@ -93,260 +92,246 @@
             </control>
         </control>
             
-        <control type="grouplist">
-            <posy>65</posy>
-            <itemgap>10</itemgap>
-            <scrolltime tween="sine" easing="out">200</scrolltime>
-            <orientation>vertical</orientation>
-            <ondown>1261</ondown>
-            <onup>1261</onup>
-        
             <!-- videos navigation -->
-            <control type="group" id="1265">
-                <description>videos nav group control</description>
+        <control type="group" id="1265">
+            <description>videos nav group control</description>
+            <width>1280</width>
+            <posy>65</posy>
+            <defaultcontrol>1266</defaultcontrol>
+            <visible>Skin.HasSetting(VideosMenu)</visible> 
+            <control type="image">
                 <width>1280</width>
                 <height>40</height>
-                <defaultcontrol>1266</defaultcontrol>
-                <visible>!VideoPlayer.IsFullscreen + Skin.HasSetting(VideosMenu)</visible> 
-                <control type="image">
+                <texture>FunnyOrDie/NavBack.png</texture>
+                <aspectratio>stretch</aspectratio>
+            </control>
+            <control type="button" id="1266">
+                <description>category_filter button</description>
+                <posx>150</posx>
+                <posy>5</posy>
+                <width>300</width>
+                <height>30</height>
+                <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
+                <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
+                <label></label>
+                <onleft>1268</onleft>
+                <onright>1267</onright>
+                <ondown>1272</ondown>
+                <onup>1261</onup>
+                <font>font13</font>
+                <align>center</align>
+                <aligny>center</aligny>
+                <textcolor>ffa9a9a9</textcolor>
+            </control>
+            <control type="button" id="1267">
+                <description>sort_filter button</description>
+                <posx>490</posx>
+                <posy>5</posy>
+                <width>300</width>
+                <height>30</height>
+                <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
+                <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
+                <label></label>
+                <onleft>1266</onleft>
+                <onright>1268</onright>
+                <ondown>1272</ondown>
+                <onup>1261</onup>
+                <font>font13</font>
+                <align>center</align>
+                <aligny>center</aligny>
+                <textcolor>ffa9a9a9</textcolor>
+            </control>
+            <control type="button" id="1268">
+                <description>date_filter button</description>
+                <posx>830</posx>
+                <posy>5</posy>
+                <width>300</width>
+                <height>30</height>
+                <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
+                <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
+                <label></label>
+                <onleft>1267</onleft>
+                <onright>1266</onright>
+                <ondown>1272</ondown>
+                <onup>1261</onup>
+                <font>font13</font>
+                <align>center</align>
+                <aligny>center</aligny>
+                <textcolor>ffa9a9a9</textcolor>
+            </control>
+        </control>
+    
+        <!-- homepage -->
+        <control type="group">
+            <width>1280</width>
+            <height>720</height>
+            <control type="grouplist">
+                <posy>85</posy>
+                <itemgap>50</itemgap>
+                <scrolltime tween="sine" easing="out">200</scrolltime>
+                <orientation>vertical</orientation>
+                <ondown>1274</ondown>
+                <onup>1261</onup>
+                <control type="panel" id="1271">
+                    <description>jumbo video control</description>
                     <width>1280</width>
-                    <height>40</height>
-                    <texture>FunnyOrDie/NavBack.png</texture>
-                    <aspectratio>stretch</aspectratio>
-                </control>
-                <control type="button" id="1266">
-                    <description>category_filter button</description>
-                    <posx>150</posx>
-                    <posy>5</posy>
-                    <width>300</width>
-                    <height>30</height>
-                    <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
-                    <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                    <label></label>
-                    <onleft>1268</onleft>
-                    <onright>1267</onright>
-                    <ondown>1272</ondown>
+                    <height>480</height>
+                    <posy>65</posy>
                     <onup>1261</onup>
-                    <font>font13</font>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                    <textcolor>ffa9a9a9</textcolor>
+                    <orientation>horizontal</orientation>
+                    <visible>Skin.HasSetting(HomeMenu)</visible>
+                    <scrolltime tween="sine" easing="out">200</scrolltime>
+                    <itemlayout height="480" width="1280">
+                        <control type="image">
+                            <width>1280</width>
+                            <height>480</height>
+                            <visible>true</visible>
+                            <info>ListItem.Icon</info>
+                            <aspectratio>scale</aspectratio>
+                        </control>
+                        <control type="label">
+                            <posx>50</posx>
+                            <posy>400</posy>
+                            <width>1100</width>
+                            <height>22</height>
+                            <font>font16</font>
+                            <selectedcolor>orange</selectedcolor>
+                            <info>ListItem.Label</info>
+                            <textcolor>ffa9a9a9</textcolor>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="480" width="1280">
+                        <control type="image">
+                            <width>1280</width>
+                            <height>480</height>
+                            <visible>true</visible>
+                            <info>ListItem.Icon</info>
+                            <aspectratio>scale</aspectratio>
+                        </control>
+                        <control type="label">
+                            <posx>50</posx>
+                            <posy>400</posy>
+                            <width>1100</width>
+                            <height>22</height>
+                            <font>font16</font>
+                            <selectedcolor>orange</selectedcolor>
+                            <info>ListItem.Label</info>
+                        </control>
+                        <control type="image">
+                            <width>1280</width>
+                            <height>480</height>
+                            <visible>true</visible>
+                            <texture>FunnyOrDie/jumbo_overlay.png</texture>
+                            <aspectratio>stretch</aspectratio>
+                        </control>
+                    </focusedlayout>
                 </control>
-                <control type="button" id="1267">
-                    <description>sort_filter button</description>
-                    <posx>490</posx>
-                    <posy>5</posy>
-                    <width>300</width>
-                    <height>30</height>
-                    <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
-                    <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                    <label></label>
-                    <onleft>1266</onleft>
-                    <onright>1268</onright>
-                    <ondown>1272</ondown>
-                    <onup>1261</onup>
-                    <font>font13</font>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                    <textcolor>ffa9a9a9</textcolor>
+
+                <control type="panel" id="1272">
+                    <description>videos control</description>
+                    <width>1200</width>
+                    <height>640</height>
+                    <posy>540</posy>
+                    <ondown>1274</ondown>
+                    <scrolltime tween="sine" easing="out">200</scrolltime>
+                    <visible>!Skin.HasSetting(BrowseMenu)</visible> 
+                    <itemlayout height="340" width="550">
+                        <control type="image">
+                            <posx>100</posx>
+                            <posy>30</posy>
+                            <width>520</width>
+                            <height>320</height>
+                            <visible>true</visible>
+                            <texture>FunnyOrDie/fod_not_selected_bak.png</texture>
+                            <aspectratio>stretch</aspectratio>
+                        </control>
+                        <control type="image">
+                            <posx>120</posx>
+                            <posy>45</posy>
+                            <width>480</width>
+                            <height>270</height>
+                            <visible>true</visible>
+                            <info>ListItem.Icon</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <posx>120</posx>
+                            <posy>75</posy>
+                            <width>100</width>
+                            <height>36</height>
+                            <visible>ListItem.Property(exclusive)</visible>
+                            <texture>FunnyOrDie/exclusive_tag.png</texture>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="label">
+                            <posx>120</posx>
+                            <posy>310</posy>
+                            <width>500</width>
+                            <height>22</height>
+                            <font>font16</font>
+                            <selectedcolor>orange</selectedcolor>
+                            <info>ListItem.Label</info>
+                            <textcolor>ffa9a9a9</textcolor>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="340" width="550">
+                        <control type="image">
+                            <posx>100</posx>
+                            <posy>30</posy>
+                            <width>520</width>
+                            <height>320</height>
+                            <visible>true</visible>
+                            <texture>FunnyOrDie/fod_selected_bak.png</texture>
+                            <aspectratio>stretch</aspectratio>
+                        </control>
+                        <control type="image">
+                            <posx>120</posx>
+                            <posy>45</posy>
+                            <width>480</width>
+                            <height>270</height>
+                            <visible>true</visible>
+                            <info>ListItem.Icon</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <posx>120</posx>
+                            <posy>75</posy>
+                            <width>100</width>
+                            <height>36</height>
+                            <visible>ListItem.Property(exclusive)</visible>
+                            <texture>FunnyOrDie/exclusive_tag.png</texture>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="label">
+                            <posx>120</posx>
+                            <posy>310</posy>
+                            <width>500</width>
+                            <height>22</height>
+                            <font>font16</font>
+                            <selectedcolor>orange</selectedcolor>
+                            <info>ListItem.Label</info>
+                        </control>
+                    </focusedlayout>
                 </control>
-                <control type="button" id="1268">
-                    <description>date_filter button</description>
-                    <posx>830</posx>
-                    <posy>5</posy>
-                    <width>300</width>
-                    <height>30</height>
-                    <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
-                    <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                    <label></label>
-                    <onleft>1267</onleft>
-                    <onright>1266</onright>
-                    <ondown>1272</ondown>
-                    <onup>1261</onup>
-                    <font>font13</font>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                    <textcolor>ffa9a9a9</textcolor>
-                </control>
+            </control>
+                
+            <control type="button" id="1274">
+                <description>load more</description>
+                <posx>600</posx>
+                <posy>660</posy>
+                <width>140</width>
+                <height>30</height>
+                <texturefocus>FunnyOrDie/FodButtonFO.png</texturefocus>
+                <texturenofocus>FunnyOrDie/FodButtonNF.png</texturenofocus>
+                <label>[B]Load More[/B]</label>
+                <font>font13</font>
+                <onup>1272</onup>
+                <ondown>1261</ondown>
+                <align>center</align>
+                <aligny>center</aligny>
+                <textcolor>ffa9a9a9</textcolor>
             </control>
         
-            <!-- homepage -->
-            <control type="panel" id="1271">
-                <description>jumbo video control</description>
-                <width>1280</width>
-                <height>480</height>
-                <onup>1261</onup>
-                <orientation>horizontal</orientation>
-                <visible>!VideoPlayer.IsFullscreen + Skin.HasSetting(HomeMenu)</visible>
-                <scrolltime tween="sine" easing="out">200</scrolltime>
-                <itemlayout height="480" width="1280">
-                    <control type="image">
-                        <width>1280</width>
-                        <height>480</height>
-                        <visible>true</visible>
-                        <info>ListItem.Icon</info>
-                        <aspectratio>scale</aspectratio>
-                    </control>
-                    <control type="label">
-                        <posx>50</posx>
-                        <posy>400</posy>
-                        <width>1100</width>
-                        <height>22</height>
-                        <font>font16</font>
-                        <selectedcolor>orange</selectedcolor>
-                        <info>ListItem.Label</info>
-                        <textcolor>ffa9a9a9</textcolor>
-                    </control>
-                </itemlayout>
-                <focusedlayout height="480" width="1280">
-                    <control type="image">
-                        <width>1280</width>
-                        <height>480</height>
-                        <visible>true</visible>
-                        <info>ListItem.Icon</info>
-                        <aspectratio>scale</aspectratio>
-                    </control>
-                    <control type="label">
-                        <posx>50</posx>
-                        <posy>400</posy>
-                        <width>1100</width>
-                        <height>22</height>
-                        <font>font16</font>
-                        <selectedcolor>orange</selectedcolor>
-                        <info>ListItem.Label</info>
-                    </control>
-                    <control type="image">
-                        <width>1280</width>
-                        <height>480</height>
-                        <visible>true</visible>
-                        <texture>FunnyOrDie/jumbo_overlay.png</texture>
-                        <aspectratio>stretch</aspectratio>
-                    </control>
-                </focusedlayout>
-            </control>
-
-            <control type="panel" id="1272">
-                <description>videos control</description>
-                <width>1240</width>
-                <height>460</height>
-                <ondown>1273</ondown>
-                <pagecontrol>1273</pagecontrol>
-                <scrolltime tween="sine" easing="out">200</scrolltime>
-                <orientation>horizontal</orientation>
-                <visible>!VideoPlayer.IsFullscreen + !Skin.HasSetting(BrowseMenu)</visible> 
-                <itemlayout height="420" width="700">
-                    <control type="image">
-                        <posx>40</posx>
-                        <posy>30</posy>
-                        <width>680</width>
-                        <height>420</height>
-                        <visible>true</visible>
-                        <texture>FunnyOrDie/fod_not_selected_bak.png</texture>
-                        <aspectratio>stretch</aspectratio>
-                    </control>
-                    <control type="image">
-                        <posx>60</posx>
-                        <posy>45</posy>
-                        <width>640</width>
-                        <height>360</height>
-                        <visible>true</visible>
-                        <info>ListItem.Icon</info>
-                        <aspectratio>keep</aspectratio>
-                    </control>
-                    <control type="image">
-                        <posx>60</posx>
-                        <posy>75</posy>
-                        <width>100</width>
-                        <height>36</height>
-                        <visible>ListItem.Property(exclusive)</visible>
-                        <texture>FunnyOrDie/exclusive_tag.png</texture>
-                        <aspectratio>keep</aspectratio>
-                    </control>
-                    <control type="label">
-                        <posx>60</posx>
-                        <posy>405</posy>
-                        <width>655</width>
-                        <height>22</height>
-                        <font>font16</font>
-                        <selectedcolor>orange</selectedcolor>
-                        <info>ListItem.Label</info>
-                        <textcolor>ffa9a9a9</textcolor>
-                    </control>
-                </itemlayout>
-                <focusedlayout height="420" width="700">
-                    <control type="image">
-                        <posx>40</posx>
-                        <posy>30</posy>
-                        <width>680</width>
-                        <height>420</height>
-                        <visible>true</visible>
-                        <texture>FunnyOrDie/fod_selected_bak.png</texture>
-                        <aspectratio>stretch</aspectratio>
-                    </control>
-                    <control type="image">
-                        <posx>60</posx>
-                        <posy>45</posy>
-                        <width>640</width>
-                        <height>360</height>
-                        <visible>true</visible>
-                        <info>ListItem.Icon</info>
-                        <aspectratio>keep</aspectratio>
-                    </control>
-                    <control type="image">
-                        <posx>60</posx>
-                        <posy>75</posy>
-                        <width>100</width>
-                        <height>36</height>
-                        <visible>ListItem.Property(exclusive)</visible>
-                        <texture>FunnyOrDie/exclusive_tag.png</texture>
-                        <aspectratio>keep</aspectratio>
-                    </control>
-                    <control type="label">
-                        <posx>60</posx>
-                        <posy>405</posy>
-                        <width>655</width>
-                        <height>22</height>
-                        <font>font16</font>
-                        <selectedcolor>orange</selectedcolor>
-                        <info>ListItem.Label</info>
-                    </control>
-                </focusedlayout>
-            </control>
-            
-            <control type="group" id="1275">
-                <width>1280</width>
-                <height>100</height>
-                <defaultcontrol>1273</defaultcontrol>
-                <visible>!VideoPlayer.IsFullscreen + !Skin.HasSetting(BrowseMenu)</visible> 
-                <control type="scrollbar" id="1273">
-                    <posx>140</posx>
-                    <posy>10</posy>
-                    <width>960</width>
-                    <height>15</height>
-                    <texturesliderbackground>FunnyOrDie/ScrollBg.png</texturesliderbackground>
-                    <textureslidernibfocus>FunnyOrDie/SliderNib.png</textureslidernibfocus>
-                    <onup>1272</onup>
-                    <ondown>1274</ondown>
-                    <showonepage>true</showonepage>
-                    <orientation>horizontal</orientation>
-                </control>
-                <control type="button" id="1274">
-                    <description>load more</description>
-                    <posx>600</posx>
-                    <posy>50</posy>
-                    <width>140</width>
-                    <height>30</height>
-                    <texturefocus>FunnyOrDie/FodButtonFO.png</texturefocus>
-                    <texturenofocus>FunnyOrDie/FodButtonNF.png</texturenofocus>
-                    <label>[B]Load More[/B]</label>
-                    <font>font13</font>
-                    <onup>1273</onup>
-                    <ondown>1261</ondown>
-                    <align>center</align>
-                    <aligny>center</aligny>
-                    <textcolor>ffa9a9a9</textcolor>
-                </control>
-            </control>
         </control>
             
             <!-- browse -->
@@ -359,7 +344,7 @@
             <ondown>1261</ondown>
             <onup>1261</onup>
             <defaultcontrol>1281</defaultcontrol>
-            <visible>!VideoPlayer.IsFullscreen + Skin.HasSetting(BrowseMenu)</visible> 
+            <visible>Skin.HasSetting(BrowseMenu)</visible> 
             <pagecontrol>60</pagecontrol>
             
             <control type="panel" id="1281">
