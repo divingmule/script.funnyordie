@@ -108,7 +108,6 @@ def get_videos_nav(soup):
 
 
 def get_homepage(url):
-    addon_log('get_homepage')
     data = make_request(url)
     soup = BeautifulSoup(data, convertEntities=BeautifulSoup.HTML_ENTITIES)
     videos = get_videos(soup)
@@ -198,25 +197,27 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
         self.next_page = None
 
     def onInit(self):
-        self.window = xbmcgui.Window(xbmcgui.getCurrentWindowId())
-        self.jumbo_control = self.window.getControl(1271)
-        self.videos_control = self.window.getControl(1272)
-        self.load_more_button = self.window.getControl(1274)
-        self.cat_control = self.window.getControl(1281)
-        self.celeb_control = self.window.getControl(1282)
-        self.nav_button_1 = self.window.getControl(1261)
-        self.nav_button_2 = self.window.getControl(1262)
-        self.nav_button_3 = self.window.getControl(1263)
-        self.nav_button_4 = self.window.getControl(1264)
-        self.video_filter_button_1 = self.window.getControl(1266)
-        self.video_filter_button_2 = self.window.getControl(1267)
-        self.video_filter_button_3 = self.window.getControl(1268)
-        self.context_dialog = self.window.getControl(1285)
-        self.context_button_1 = self.window.getControl(1286)
-        self.filter_dialog = self.window.getControl(1288)
-        self.filter_list = self.window.getControl(1289)
-        self.load_more_button.setVisible(False)
-        self.display_homepage()
+        if self.menu is None:
+            self.window = xbmcgui.Window(xbmcgui.getCurrentWindowId())
+            self.jumbo_control = self.window.getControl(1271)
+            self.videos_control = self.window.getControl(1272)
+            self.load_more_button = self.window.getControl(1274)
+            self.cat_control = self.window.getControl(1281)
+            self.celeb_control = self.window.getControl(1282)
+            self.nav_button_1 = self.window.getControl(1261)
+            self.nav_button_2 = self.window.getControl(1262)
+            self.nav_button_3 = self.window.getControl(1263)
+            self.nav_button_4 = self.window.getControl(1264)
+            self.video_filter_button_1 = self.window.getControl(1266)
+            self.video_filter_button_2 = self.window.getControl(1267)
+            self.video_filter_button_3 = self.window.getControl(1268)
+            self.context_dialog = self.window.getControl(1285)
+            self.context_button_1 = self.window.getControl(1286)
+            self.filter_dialog = self.window.getControl(1288)
+            self.filter_list = self.window.getControl(1289)
+            addon_log('display_homepage()')
+            self.load_more_button.setVisible(False)
+            self.display_homepage()
         
 
     def display_homepage(self, page=False):
@@ -243,7 +244,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
     def display_all_videos(self):
         control_position = None
         if self.video_page is None:
-            href = '/browse/videos/all/all/most_recent/this_week'
+            href = '/browse/videos/all/all/most_recent'
             self.videos_control.reset()
             self.set_menu('VideosMenu')
         else:
