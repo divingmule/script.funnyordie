@@ -11,6 +11,7 @@ addon = xbmcaddon.Addon()
 addon_id = addon.getAddonInfo('id')
 addon_version = addon.getAddonInfo('version')
 addon_path = xbmc.translatePath(addon.getAddonInfo('path'))
+language = addon.getLocalizedString
 cache = StorageServer.StorageServer("funnyordie", 2)
 base_url = 'http://www.funnyordie.com'
 cache.dbg = True
@@ -151,7 +152,7 @@ def get_page(href):
 
 def get_search(href=None):
     if href is None:
-        keyboard = xbmc.Keyboard('', 'Search')
+        keyboard = xbmc.Keyboard('', language(32003))
         keyboard.doModal()
         if keyboard.isConfirmed() == False:
             return
@@ -311,17 +312,17 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
             self.set_nav_control()
 
     def set_nav_control(self):
-        self.nav_button_1.setLabel('[B]Browse[/B]')
-        self.nav_button_2.setLabel('[B]All Videos[/B]')
+        self.nav_button_1.setLabel('[B]%s[/B]' %language(32001))
+        self.nav_button_2.setLabel('[B]%s[/B]' %language(32002))
         if self.menu == 'HomeMenu':
             v_control = self.jumbo_control
         elif self.menu == 'BrowseMenu':
             v_control = self.cat_control
-            self.nav_button_1.setLabel('[B]Home[/B]')
+            self.nav_button_1.setLabel('[B]%s[/B]' %language(32005))
         elif self.menu == 'Videos' or self.menu == 'Search':
             v_control = self.videos_control
         elif self.menu == 'VideosMenu':
-            self.nav_button_2.setLabel('[B]Home[/B]')
+            self.nav_button_2.setLabel('[B]%s[/B]' %language(32005))
             v_control = self.video_filter_button_1
         self.nav_button_1.setNavigation(v_control, v_control, self.nav_button_4, self.nav_button_2)
         self.nav_button_2.setNavigation(v_control, v_control, self.nav_button_1, self.nav_button_3)

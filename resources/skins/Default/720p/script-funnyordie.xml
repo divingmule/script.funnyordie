@@ -38,7 +38,7 @@
                 <height>40</height>
                 <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
                 <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label>[B]Browse[/B]</label>
+                <label>[B]$ADDON[script.funnyordie 32001][/B]</label>
                 <font>font13</font>
                 <align>center</align>
                 <aligny>center</aligny>
@@ -52,7 +52,7 @@
                 <height>40</height>
                 <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
                 <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label>[B]All Videos[/B]</label>
+                <label>[B]$ADDON[script.funnyordie 32002][/B]</label>
                 <font>font13</font>
                 <onleft>1261</onleft>
                 <onright>1263</onright>
@@ -68,7 +68,7 @@
                 <height>40</height>
                 <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
                 <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label>[B]Search[/B]</label>
+                <label>[B]$ADDON[script.funnyordie 32003][/B]</label>
                 <font>font13</font>
                 <align>center</align>
                 <aligny>center</aligny>
@@ -82,7 +82,7 @@
                 <height>40</height>
                 <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
                 <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label>[B]Exit[/B]</label>
+                <label>[B]$ADDON[script.funnyordie 32004][/B]</label>
                 <font>font13</font>
                 <align>center</align>
                 <aligny>center</aligny>
@@ -321,7 +321,7 @@
                 <height>30</height>
                 <texturefocus>FunnyOrDie/FodButtonFO.png</texturefocus>
                 <texturenofocus>FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label>[B]Load More[/B]</label>
+                <label>[B]$ADDON[script.funnyordie 32006][/B]</label>
                 <font>font13</font>
                 <onup>1272</onup>
                 <ondown>1261</ondown>
@@ -461,7 +461,7 @@
                 <width>340</width>
                 <height>40</height>
                 <font>font16</font>
-                <label>[B]Autoplay from here?[/B]</label>
+                <label>[B]$ADDON[script.funnyordie 32007][/B]</label>
             </control>
             <control type="button" id="1286">
                 <description>yes button</description>
@@ -471,7 +471,7 @@
                 <height>40</height>
                 <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
                 <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label>[B]Yes[/B]</label>
+                <label>[B]$ADDON[script.funnyordie 32008][/B]</label>
                 <font>font13</font>
                 <onleft>1287</onleft>
                 <onright>1287</onright>
@@ -487,7 +487,7 @@
                 <height>40</height>
                 <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
                 <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label>[B]No[/B]</label>
+                <label>[B]$ADDON[script.funnyordie 32009][/B]</label>
                 <font>font13</font>
                 <onleft>1286</onleft>
                 <onright>1286</onright>
