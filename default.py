@@ -18,7 +18,7 @@ cache.dbg = True
 
 
 def addon_log(string):
-    xbmc.log("[%s-%s]: %s" %(addon_id, addon_version, string))
+    xbmc.log("[%s-%s]: %s" %(addon_id, addon_version, string), level=xbmc.LOGDEBUG)
 
 
 ## Thanks to Fredrik Lundh for this function - http://effbot.org/zone/re-sub.htm#unescape-html
@@ -549,7 +549,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
 
 if __name__ == "__main__":
     addon_log('script starting')
-    window = FunnyOrDieGUI('script-funnyordie.xml', addon_path)
+    window = FunnyOrDieGUI('script-FunnyOrDie.xml', addon_path)
     window.doModal()
 
 addon_log('script finished')

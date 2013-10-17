@@ -52,28 +52,3 @@ msgstr ""
 msgctxt "#32009"
 msgid "No"
 msgstr ""
-
-
-msgctxt "#32010"
-msgid ""
-msgstr ""
-
-msgctxt "#32011"
-msgid ""
-msgstr ""
-
-msgctxt "#32012"
-msgid ""
-msgstr ""
-
-msgctxt "#32013"
-msgid ""
-msgstr ""
-
-msgctxt "#32014"
-msgid ""
-msgstr ""
-
-msgctxt "#32015"
-msgid ""
-msgstr ""

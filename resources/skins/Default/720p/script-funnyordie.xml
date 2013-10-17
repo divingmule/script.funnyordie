@@ -369,7 +369,7 @@
                         <width>220</width>
                         <height>320</height>
                         <visible>true</visible>
-                        <texture>FunnyOrDie/fod_selected_bak.png</texture>
+                        <texture>FunnyOrDie/FodVidBackFO.png</texture>
                         <aspectratio>stretch</aspectratio>
                     </control>
                     <control type="image">
@@ -418,7 +418,7 @@
                         <width>220</width>
                         <height>260</height>
                         <visible>true</visible>
-                        <texture>FunnyOrDie/fod_selected_bak.png</texture>
+                        <texture>FunnyOrDie/FodVidBackFO.png</texture>
                         <aspectratio>stretch</aspectratio>
                     </control>
                     <control type="image">
@@ -433,7 +433,7 @@
                     <control type="label">
                         <posx>10</posx>
                         <posy>230</posy>
-                        <width>210</width>
+                        <width>205</width>
                         <height>22</height>
                         <font>font13</font>
                         <info>ListItem.Label</info>
