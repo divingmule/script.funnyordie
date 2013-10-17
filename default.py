@@ -295,11 +295,16 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
         self.set_menu('Videos')
 
     def display_search(self, next_page, items):
+        control_position = self.videos_control.size()
         for i in items:
             self.videos_control.addItem(get_listitem(i, True))
         if next_page:
             self.next_page = next_page
-        self.set_menu('Search')
+        if self.menu == 'Search':
+            if control_position:
+                self.move_videos_control(control_position)
+        else:
+            self.set_menu('Search')
 
     def set_menu(self, menu=None):
         self.menu = None
@@ -542,7 +547,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
             
 
 
-if (__name__ == "__main__"):
+if __name__ == "__main__":
     addon_log('script starting')
     window = FunnyOrDieGUI('script-funnyordie.xml', addon_path)
     window.doModal()

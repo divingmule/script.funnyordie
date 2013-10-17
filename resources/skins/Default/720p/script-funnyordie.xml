@@ -89,75 +89,7 @@
                 <textcolor>ffa9a9a9</textcolor>
             </control>
         </control>
-            
-            <!-- videos navigation -->
-        <control type="group" id="1265">
-            <description>videos nav group control</description>
-            <width>1280</width>
-            <posy>65</posy>
-            <defaultcontrol>1266</defaultcontrol>
-            <visible>Skin.HasSetting(VideosMenu)</visible> 
-            <control type="image">
-                <width>1280</width>
-                <height>40</height>
-                <texture>FunnyOrDie/NavBack.png</texture>
-                <aspectratio>stretch</aspectratio>
-            </control>
-            <control type="button" id="1266">
-                <description>category_filter button</description>
-                <posx>150</posx>
-                <posy>5</posy>
-                <width>300</width>
-                <height>30</height>
-                <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
-                <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label></label>
-                <onleft>1268</onleft>
-                <onright>1267</onright>
-                <ondown>1272</ondown>
-                <onup>1261</onup>
-                <font>font13</font>
-                <align>center</align>
-                <aligny>center</aligny>
-                <textcolor>ffa9a9a9</textcolor>
-            </control>
-            <control type="button" id="1267">
-                <description>sort_filter button</description>
-                <posx>490</posx>
-                <posy>5</posy>
-                <width>300</width>
-                <height>30</height>
-                <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
-                <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label></label>
-                <onleft>1266</onleft>
-                <onright>1268</onright>
-                <ondown>1272</ondown>
-                <onup>1261</onup>
-                <font>font13</font>
-                <align>center</align>
-                <aligny>center</aligny>
-                <textcolor>ffa9a9a9</textcolor>
-            </control>
-            <control type="button" id="1268">
-                <description>date_filter button</description>
-                <posx>830</posx>
-                <posy>5</posy>
-                <width>300</width>
-                <height>30</height>
-                <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
-                <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
-                <label></label>
-                <onleft>1267</onleft>
-                <onright>1266</onright>
-                <ondown>1272</ondown>
-                <onup>1261</onup>
-                <font>font13</font>
-                <align>center</align>
-                <aligny>center</aligny>
-                <textcolor>ffa9a9a9</textcolor>
-            </control>
-        </control>
+
     
         <!-- homepage -->
         <control type="group">
@@ -165,7 +97,7 @@
             <height>720</height>
             <control type="grouplist">
                 <posy>85</posy>
-                <itemgap>50</itemgap>
+                <itemgap>10</itemgap>
                 <scrolltime tween="sine" easing="out">200</scrolltime>
                 <orientation>vertical</orientation>
                 <ondown>1274</ondown>
@@ -224,10 +156,80 @@
                         </control>
                     </focusedlayout>
                 </control>
-
+            
+                <!-- videos navigation -->
+            <control type="group" id="1265">
+                <description>videos nav group control</description>
+                <width>1280</width>
+                <height>40</height>
+                <posy>65</posy>
+                <defaultcontrol>1266</defaultcontrol>
+                <visible>Skin.HasSetting(VideosMenu)</visible> 
+                <control type="image">
+                    <width>1280</width>
+                    <height>40</height>
+                    <texture>FunnyOrDie/NavBack.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+                <control type="button" id="1266">
+                    <description>category_filter button</description>
+                    <posx>150</posx>
+                    <posy>5</posy>
+                    <width>300</width>
+                    <height>30</height>
+                    <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
+                    <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
+                    <label></label>
+                    <onleft>1268</onleft>
+                    <onright>1267</onright>
+                    <ondown>1272</ondown>
+                    <onup>1261</onup>
+                    <font>font13</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textcolor>ffa9a9a9</textcolor>
+                </control>
+                <control type="button" id="1267">
+                    <description>sort_filter button</description>
+                    <posx>490</posx>
+                    <posy>5</posy>
+                    <width>300</width>
+                    <height>30</height>
+                    <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
+                    <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
+                    <label></label>
+                    <onleft>1266</onleft>
+                    <onright>1268</onright>
+                    <ondown>1272</ondown>
+                    <onup>1261</onup>
+                    <font>font13</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textcolor>ffa9a9a9</textcolor>
+                </control>
+                <control type="button" id="1268">
+                    <description>date_filter button</description>
+                    <posx>830</posx>
+                    <posy>5</posy>
+                    <width>300</width>
+                    <height>30</height>
+                    <texturefocus border="10">FunnyOrDie/FodButtonFO.png</texturefocus>
+                    <texturenofocus border="10">FunnyOrDie/FodButtonNF.png</texturenofocus>
+                    <label></label>
+                    <onleft>1267</onleft>
+                    <onright>1266</onright>
+                    <ondown>1272</ondown>
+                    <onup>1261</onup>
+                    <font>font13</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textcolor>ffa9a9a9</textcolor>
+                </control>
+            </control>
+            
                 <control type="panel" id="1272">
                     <description>videos control</description>
-                    <width>1200</width>
+                    <width>1280</width>
                     <height>640</height>
                     <posy>540</posy>
                     <ondown>1274</ondown>
@@ -240,7 +242,7 @@
                             <width>520</width>
                             <height>320</height>
                             <visible>true</visible>
-                            <texture>FunnyOrDie/fod_not_selected_bak.png</texture>
+                            <texture>FunnyOrDie/FodVidBackNF.png</texture>
                             <aspectratio>stretch</aspectratio>
                         </control>
                         <control type="image">
@@ -263,10 +265,10 @@
                         </control>
                         <control type="label">
                             <posx>120</posx>
-                            <posy>310</posy>
-                            <width>500</width>
+                            <posy>315</posy>
+                            <width>490</width>
                             <height>22</height>
-                            <font>font16</font>
+                            <font>font13</font>
                             <selectedcolor>orange</selectedcolor>
                             <info>ListItem.Label</info>
                             <textcolor>ffa9a9a9</textcolor>
@@ -279,7 +281,7 @@
                             <width>520</width>
                             <height>320</height>
                             <visible>true</visible>
-                            <texture>FunnyOrDie/fod_selected_bak.png</texture>
+                            <texture>FunnyOrDie/FodVidBackFO.png</texture>
                             <aspectratio>stretch</aspectratio>
                         </control>
                         <control type="image">
@@ -302,10 +304,10 @@
                         </control>
                         <control type="label">
                             <posx>120</posx>
-                            <posy>310</posy>
-                            <width>500</width>
+                            <posy>315</posy>
+                            <width>490</width>
                             <height>22</height>
-                            <font>font16</font>
+                            <font>font13</font>
                             <selectedcolor>orange</selectedcolor>
                             <info>ListItem.Label</info>
                         </control>
@@ -347,7 +349,7 @@
             
             <control type="panel" id="1281">
                 <width>1260</width>
-                <height>720</height>
+                <height>690</height>
                 <onup>1261</onup>
                 <scrolltime tween="sine" easing="out">200</scrolltime>
                 <itemlayout height="320" width="220">
@@ -384,7 +386,7 @@
             
             <control type="panel" id="1282">
                 <width>1260</width>
-                <height>720</height>
+                <height>600</height>
                 <posx>10</posx>
                 <posy>60</posy>
                 <onup>1281</onup>
