@@ -3,7 +3,6 @@ import urllib
 import urllib2
 import xbmcgui
 import xbmcaddon
-import StorageServer
 from traceback import format_exc
 from BeautifulSoup import BeautifulSoup
 
@@ -159,7 +158,7 @@ def get_search(href=None):
         addon_log('get_search: %s' %search_query)
         href = '/search/a?search_term=%s' %urllib.quote_plus(search_query)
     else:
-        print href
+        addon_log('Search: %s' %href)
     data = make_request(base_url + href)
     soup = BeautifulSoup(data, convertEntities=BeautifulSoup.HTML_ENTITIES)
     try:
@@ -215,10 +214,9 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
             self.context_button_1 = self.window.getControl(1286)
             self.filter_dialog = self.window.getControl(1288)
             self.filter_list = self.window.getControl(1289)
-            addon_log('display_homepage()')
             self.load_more_button.setVisible(False)
             self.display_homepage()
-        
+
 
     def display_homepage(self, page=False):
         if not page:
@@ -380,7 +378,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
             self.load_more_button.setVisible(True)
         else:
             self.load_more_button.setVisible(False)
-            
+
     def shutdown(self):
         self.window.setProperty('videos_filter', '')
         self.set_menu()
@@ -407,7 +405,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
                 self.display_homepage()
             else:
                 self.shutdown()
-                
+
         elif action in (107, 1, 2, 3, 4):
             if self.next_page:
                 self.set_current_control()
@@ -528,7 +526,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
             items = [self.current_control.getListItem(i)
                 for i in range(self.current_control.getSelectedPosition(), self.current_control.size())]
             play(items, True)
-            self.current_control = None
+            self.setFocus(self.current_control)
 
         elif control_id == 1287:
             xbmc.executebuiltin("Skin.Reset(ContextDialog)")
@@ -544,7 +542,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
             self.display_all_videos()
             self.menu = 'VideosMenu'
             self.setFocus(self.videos_control)
-            
+
 
 
 if __name__ == "__main__":

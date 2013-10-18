@@ -1,10 +1,11 @@
 <window>
     <allowoverlay>yes</allowoverlay>
+    <defaultcontrol always="false">1261</defaultcontrol>
     <controls>
-    
+
         <control type="image">
             <description>Normal Default Background Image</description>
-            <visible>!VideoPlayer.IsFullscreen</visible> 
+            <visible>true</visible>
             <posx>0</posx>
             <posy>0</posy>
             <width>1280</width>
@@ -12,12 +13,11 @@
             <aspectratio>scale</aspectratio>
             <texture>FunnyOrDie/background.jpg</texture>
         </control>
-        
+
         <!-- navigation -->
         <control type="group" id="1260">
             <description>nav group control</description>
-            <defaultcontrol always="false">1261</defaultcontrol>
-            <visible>!VideoPlayer.IsFullscreen</visible> 
+            <visible>true</visible>
             <control type="image">
                 <width>1280</width>
                 <height>60</height>
@@ -90,7 +90,7 @@
             </control>
         </control>
 
-    
+
         <!-- homepage -->
         <control type="group">
             <width>1280</width>
@@ -156,7 +156,7 @@
                         </control>
                     </focusedlayout>
                 </control>
-            
+
                 <!-- videos navigation -->
             <control type="group" id="1265">
                 <description>videos nav group control</description>
@@ -164,7 +164,7 @@
                 <height>40</height>
                 <posy>65</posy>
                 <defaultcontrol>1266</defaultcontrol>
-                <visible>Skin.HasSetting(VideosMenu)</visible> 
+                <visible>Skin.HasSetting(VideosMenu)</visible>
                 <control type="image">
                     <width>1280</width>
                     <height>40</height>
@@ -226,7 +226,7 @@
                     <textcolor>ffa9a9a9</textcolor>
                 </control>
             </control>
-            
+
                 <control type="panel" id="1272">
                     <description>videos control</description>
                     <width>1280</width>
@@ -234,7 +234,7 @@
                     <posy>540</posy>
                     <ondown>1274</ondown>
                     <scrolltime tween="sine" easing="out">200</scrolltime>
-                    <visible>!Skin.HasSetting(BrowseMenu)</visible> 
+                    <visible>!Skin.HasSetting(BrowseMenu)</visible>
                     <itemlayout height="340" width="550">
                         <control type="image">
                             <posx>100</posx>
@@ -314,7 +314,7 @@
                     </focusedlayout>
                 </control>
             </control>
-                
+
             <control type="button" id="1274">
                 <description>load more</description>
                 <posx>600</posx>
@@ -331,9 +331,9 @@
                 <aligny>center</aligny>
                 <textcolor>ffa9a9a9</textcolor>
             </control>
-        
+
         </control>
-            
+
             <!-- browse -->
         <control type="grouplist" id="1280">
             <posx>60</posx>
@@ -344,9 +344,9 @@
             <ondown>1261</ondown>
             <onup>1261</onup>
             <defaultcontrol>1281</defaultcontrol>
-            <visible>Skin.HasSetting(BrowseMenu)</visible> 
+            <visible>Skin.HasSetting(BrowseMenu)</visible>
             <pagecontrol>60</pagecontrol>
-            
+
             <control type="panel" id="1281">
                 <width>1260</width>
                 <height>690</height>
@@ -383,7 +383,7 @@
                     </control>
                 </focusedlayout>
             </control>
-            
+
             <control type="panel" id="1282">
                 <width>1260</width>
                 <height>600</height>
@@ -441,7 +441,7 @@
                 </focusedlayout>
             </control>
         </control>
-        
+
         <!-- context dialog -->
         <control type="group" id="1285">
             <description>context dialog</description>
@@ -450,7 +450,7 @@
             <posx>500</posx>
             <posy>300</posy>
             <defaultcontrol>1286</defaultcontrol>
-            <visible>Skin.HasSetting(ContextDialog)</visible> 
+            <visible>Skin.HasSetting(ContextDialog)</visible>
             <control type="image">
                 <width>500</width>
                 <height>140</height>
@@ -479,7 +479,7 @@
                 <onright>1287</onright>
                 <align>center</align>
                 <aligny>center</aligny>
-                <textcolor>ffa9a9a9</textcolor> 
+                <textcolor>ffa9a9a9</textcolor>
             </control>
             <control type="button" id="1287">
                 <description>no button</description>
@@ -498,20 +498,20 @@
                 <textcolor>ffa9a9a9</textcolor>
             </control>
         </control>
-        
+
         <!-- filter dialog -->
         <control type="group" id="1288">
             <description>filter dialog</description>
-            <visible>Skin.HasSetting(FilterDialog)</visible> 
+            <visible>Skin.HasSetting(FilterDialog)</visible>
             <control type="image">
                 <posy>20</posy>
                 <posx>60</posx>
                 <width>280</width>
                 <height>180</height>
                 <texture>FunnyOrDie/fod_dialog_bak.png</texture>
-                <visible>Control.HasFocus(1289)</visible> 
+                <visible>Control.HasFocus(1289)</visible>
             </control>
-        
+
             <control type="wraplist" id="1289">
                 <width>300</width>
                 <height>175</height>
@@ -524,7 +524,7 @@
                         <align>left</align>
                         <info>ListItem.Label</info>
                         <textcolor>ffa9a9a9</textcolor>
-                        <visible>Control.HasFocus(1289)</visible> 
+                        <visible>Control.HasFocus(1289)</visible>
                     </control>
                 </itemlayout>
                 <focusedlayout width="300" height="29">
@@ -535,7 +535,7 @@
                         <aligny>center</aligny>
                         <align>left</align>
                         <info>ListItem.Label</info>
-                        <visible>Control.HasFocus(1289)</visible> 
+                        <visible>Control.HasFocus(1289)</visible>
                     </control>
                 </focusedlayout>
             </control>
