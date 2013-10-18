@@ -5,8 +5,7 @@
        provider-name="divingmule">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.0"/>
-    <import addon="script.common.plugin.cache" version="2.5.1"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
   </requires>
   <extension point="xbmc.python.script" library="default.py">
     <provides>video</provides>
@@ -20,7 +19,7 @@
     <platform>all</platform>
     <language>en</language>
     <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-    <source></source>
-    <forum></forum>
+    <source>https://github.com/divingmule/script.funnyordie</source>
+    <forum>http://forum.xbmc.org/showthread.php?tid=174829</forum>
   </extension>
 </addon>

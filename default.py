@@ -12,9 +12,7 @@ addon_id = addon.getAddonInfo('id')
 addon_version = addon.getAddonInfo('version')
 addon_path = xbmc.translatePath(addon.getAddonInfo('path'))
 language = addon.getLocalizedString
-cache = StorageServer.StorageServer("funnyordie", 2)
 base_url = 'http://www.funnyordie.com'
-cache.dbg = True
 
 
 def addon_log(string):
@@ -137,7 +135,6 @@ def get_homepage(url):
             'categories': [{'href': i.a['href'], 'thumb': i.img['data-src'], 'title': i.a.div.string}
                            for i in cat_items if not i.a.div.string == 'Articles' and not i.a.div.string == 'Images']
             }
-        cache.set('homepage', repr(page_dict))
         return page_dict
     else:
         return {'page': next_page, 'videos': videos}
@@ -196,6 +193,8 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
         self.menu = None
         self.video_page = None
         self.next_page = None
+        self.home_dict = None
+        self.videos_nav = None
 
     def onInit(self):
         if self.menu is None:
@@ -228,6 +227,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
             self.videos_control.reset()
             for i in data['jumbo']:
                 self.jumbo_control.addItem(get_listitem(i, True))
+                self.home_dict = data
         else:
             data = get_homepage(page)
             control_position = self.videos_control.size()
@@ -280,7 +280,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
 
     def display_browse(self):
         if self.cat_control.size() < 1:
-            data = eval(cache.get('homepage'))
+            data = self.home_dict
             for i in data['categories']:
                 self.cat_control.addItem(get_listitem(i))
             for i in data['celebs']:
@@ -345,7 +345,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
             elif i['label'] == 'DATE':
                 control = self.window.getControl(1268)
             control.setLabel('%s :  [B]%s[/B]' %(i['label'], i['value']))
-        cache.set('videos_nav', repr(nav))
+        self.videos_nav = nav
 
     def set_video_filter_button(self, reset=False):
         for i in [self.video_filter_button_1, self.video_filter_button_2, self.video_filter_button_3]:
@@ -357,7 +357,7 @@ class FunnyOrDieGUI(xbmcgui.WindowXML):
                 i.controlUp(self.nav_button_1)
 
     def filter_videos(self, filter_type):
-        items = eval(cache.get('videos_nav'))[filter_type]
+        items = self.videos_nav[filter_type]
         for i in items:
             self.filter_list.addItem(get_listitem(i))
         xbmc.executebuiltin("Skin.ToggleSetting(FilterDialog)")
